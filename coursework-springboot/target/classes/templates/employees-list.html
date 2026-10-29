@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Список сотрудников</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/employees/list}">Система учета сотрудников</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/employees/list}">Сотрудники</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/about}">О приложении</a></li>
+                <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/admin/users}">Управление ролями</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Выход</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-4">
+    <h2>Список сотрудников</h2>
+    <a th:href="@{/employees/add}" class="btn btn-primary mb-3"
+       sec:authorize="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">Добавить сотрудника</a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Фамилия</th><th>Имя</th><th>Возраст</th><th>Отдел</th><th>Оклад</th><th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="e : ${employees}">
+            <td th:text="${e.surname}"></td>
+            <td th:text="${e.name}"></td>
+            <td th:text="${e.age}"></td>
+            <td th:text="${e.department}"></td>
+            <td th:text="${e.salary}"></td>
+            <td>
+                <a th:href="@{/addresses/list/{id}(id=${e.id})}" class="btn btn-sm btn-secondary">Адреса</a>
+                <a th:href="@{/employees/calculate/{id}(id=${e.id})}" class="btn btn-sm btn-info">Премия</a>
+                <a th:href="@{/employees/update/{id}(id=${e.id})}" class="btn btn-sm btn-warning"
+                   sec:authorize="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">Изменить</a>
+                <a th:href="@{/employees/delete/{id}(id=${e.id})}" class="btn btn-sm btn-danger"
+                   sec:authorize="hasAuthority('ROLE_ADMIN')">Удалить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>l>

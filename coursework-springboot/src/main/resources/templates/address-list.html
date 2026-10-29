@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Адреса</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h3>Адреса сотрудника</h3>
+    <a th:href="@{/addresses/add/{id}(id=${employeeId})}" class="btn btn-primary mb-3">Добавить адрес</a>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+        <tr><th>Город</th><th>Улица</th><th>Дом</th><th>Квартира</th><th>Действия</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="a : ${addresses}">
+            <td th:text="${a.city}"></td>
+            <td th:text="${a.street}"></td>
+            <td th:text="${a.house}"></td>
+            <td th:text="${a.apartment}"></td>
+            <td><a th:href="@{/addresses/delete/{id}(id=${a.id})}" class="btn btn-sm btn-danger">Удалить</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/employees/list}" class="btn btn-secondary">Назад</a>
+</div>
+</body>
+</html>

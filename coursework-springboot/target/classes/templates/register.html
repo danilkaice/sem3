@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/index}">Система учета сотрудников</a>
+    </div>
+</nav>
+<div class="container mt-5">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header"><h2 class="text-center">Регистрация</h2></div>
+            <div th:if="${param.success}" class="alert alert-info">Вы успешно зарегистрированы!</div>
+            <div class="card-body">
+                <form method="post" th:action="@{/register/save}" th:object="${user}">
+                    <div class="mb-3">
+                        <label>Имя</label>
+                        <input class="form-control" th:field="*{firstName}" type="text"/>
+                        <p th:errors="*{firstName}" class="text-danger"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label>Фамилия</label>
+                        <input class="form-control" th:field="*{lastName}" type="text"/>
+                        <p th:errors="*{lastName}" class="text-danger"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input class="form-control" th:field="*{email}" type="email"/>
+                        <p th:errors="*{email}" class="text-danger"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label>Пароль</label>
+                        <input class="form-control" th:field="*{password}" type="password"/>
+                        <p th:errors="*{password}" class="text-danger"></p>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+                    <span>Уже есть аккаунт? <a th:href="@{/login}">Войти</a></span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

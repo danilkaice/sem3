@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление ролями</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/employees/list}">Система учета сотрудников</a>
+    </div>
+</nav>
+<div class="container mt-4">
+    <h3>Управление ролями пользователей</h3>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+        <tr><th>Email</th><th>Имя</th><th>Текущие роли</th><th>Назначить роль</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${users}">
+            <td th:text="${u.email}"></td>
+            <td th:text="${u.firstName} + ' ' + ${u.lastName}"></td>
+            <td>
+                <span th:each="r : ${u.roles}" class="badge bg-info me-1" th:text="${r.name}"></span>
+            </td>
+            <td>
+                <form th:action="@{/admin/assign-role}" method="post" class="d-flex gap-2">
+                    <input type="hidden" name="email" th:value="${u.email}"/>
+                    <select name="role" class="form-select form-select-sm">
+                        <option value="ROLE_USER">USER</option>
+                        <option value="ROLE_ADMIN">ADMIN</option>
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-primary">Назначить</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/employees/list}" class="btn btn-secondary">Назад</a>
+</div>
+</body>
+</html>

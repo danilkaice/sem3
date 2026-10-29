@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>О приложении</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/index}">Система учета сотрудников</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/employees/list}">Сотрудники</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/index}">Главная</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-4">
+    <h2>О приложении</h2>
+    <div class="card">
+        <div class="card-body">
+            <p><b>Название:</b> Система учета сотрудников</p>
+            <p><b>Версия:</b> 1.0</p>
+            <p><b>Разработчик:</b> Зеленовский Д.М.</p>
+            <p><b>Описание:</b> Веб-приложение для учета сотрудников и их адресов
+                с разграничением доступа по ролям (READ_ONLY, USER, ADMIN).
+                Реализован расчет годовой премии, управление ролями, логирование в файл.</p>
+            <p><b>Технологии:</b> Spring Boot 2.7.8, Spring Security, Spring Data JPA,
+                Thymeleaf, H2, Lombok, Actuator, Bootstrap 5.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

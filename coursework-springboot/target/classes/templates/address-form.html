@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Адрес</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h3>Новый адрес</h3>
+    <form th:action="@{/addresses/save}" th:object="${address}" method="post">
+        <input type="hidden" th:field="*{employeeId}"/>
+        <div class="mb-3"><label>Город</label><input type="text" th:field="*{city}" class="form-control"/></div>
+        <div class="mb-3"><label>Улица</label><input type="text" th:field="*{street}" class="form-control"/></div>
+        <div class="mb-3"><label>Дом</label><input type="text" th:field="*{house}" class="form-control"/></div>
+        <div class="mb-3"><label>Квартира</label><input type="text" th:field="*{apartment}" class="form-control"/></div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a th:href="@{/addresses/list/{id}(id=${address.employeeId})}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+</body>
+</html>
